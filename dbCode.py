@@ -3,7 +3,7 @@
 # Helper functions for database connection and queries
 
 import pymysql
-#import creds
+import creds
 
 def get_conn():
     """Returns a connection to the MySQL RDS instance."""
@@ -22,3 +22,12 @@ def execute_query(query, args=()):
     rows = cur.fetchall()
     cur.close()
     return rows
+
+def get_countries():
+    query = """
+        SELECT Code, Name, Continent, Population
+        FROM country
+        ORDER BY Name
+        LIMIT 20
+    """
+    return execute_query(query)
