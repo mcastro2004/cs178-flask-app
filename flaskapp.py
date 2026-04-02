@@ -15,7 +15,12 @@ app.secret_key = 'your_secret_key' # this is an artifact for using flash display
 def home():
     return render_template('home.html')
 
-@app.route('/add-user', methods=['GET', 'POST'])
+@app.route('/countries')
+def countries():
+    countries_list = get_countries()
+    return render_template('countries.html', countries=countries_list)
+
+"""@app.route('/add-user', methods=['GET', 'POST'])
 def add_user():
     if request.method == 'POST':
         # Extract form data
@@ -58,7 +63,7 @@ def display_users():
     # note that this could have been a result from an SQL query :) 
     users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
     return render_template('display_users.html', users = users_list)
-
+"""
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':

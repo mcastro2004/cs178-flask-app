@@ -1,9 +1,11 @@
 # dbCode.py
-# Author: Your Name
+# Author: Michael Castro
 # Helper functions for database connection and queries
+
 
 import pymysql
 import creds
+from creds import *
 
 def get_conn():
     """Returns a connection to the MySQL RDS instance."""

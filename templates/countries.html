@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>World Countries</title>
+</head>
+<body>
+    <h1>Countries from the World Database</h1>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Continent</th>
+            <th>Population</th>
+        </tr>
+
+        {% for country in countries %}
+        <tr>
+            <td>{{ country.Code }}</td>
+            <td>{{ country.Name }}</td>
+            <td>{{ country.Continent }}</td>
+            <td>{{ country.Population }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
