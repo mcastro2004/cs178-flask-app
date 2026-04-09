@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Favorite</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Update Favorite Note</h1>
+
+        <p><strong>{{ favorite.Name }}</strong> ({{ favorite.Code }})</p>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="note">Note</label>
+                <input type="text" class="form-control" name="note" id="note" value="{{ favorite.Note }}">
+            </div>
+
+            <button type="submit" class="btn btn-warning">Update Note</button>
+            <a href="/favorites" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

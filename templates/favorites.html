@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Countries</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Favorite Countries</h1>
+
+        <a href="/" class="btn btn-secondary mb-3">Home</a>
+        <a href="/countries" class="btn btn-primary mb-3">Back to Countries</a>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Continent</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for favorite in favorites %}
+            <tr>
+                <td>{{ favorite.Code }}</td>
+                <td>{{ favorite.Name }}</td>
+                <td>{{ favorite.Continent }}</td>
+                <td>{{ favorite.Note }}</td>
+                <td>
+                    <a href="/update-favorite/{{ favorite.Code }}" class="btn btn-warning btn-sm">Update</a>
+
+                    <form action="/delete-favorite/{{ favorite.Code }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

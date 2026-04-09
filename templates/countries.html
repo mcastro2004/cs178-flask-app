@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>World Countries</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <h1>Countries from the World Database</h1>
@@ -12,6 +13,7 @@
             <th>Name</th>
             <th>Continent</th>
             <th>Population</th>
+            <th>Action</th>
         </tr>
 
         {% for country in countries %}
@@ -31,6 +33,5 @@
         </tr>
         {% endfor %}
     </table>
-    </div>
 </body>
 </html>
