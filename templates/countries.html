@@ -20,8 +20,17 @@
             <td>{{ country.Name }}</td>
             <td>{{ country.Continent }}</td>
             <td>{{ country.Population }}</td>
+            <td>
+                <form action="/add-favorite" method="POST">
+                    <input type="hidden" name="code" value="{{ country.Code }}">
+                    <input type="hidden" name="name" value="{{ country.Name }}">
+                    <input type="hidden" name="continent" value="{{ country.Continent }}">
+                    <button type="submit" class="btn btn-success btn-sm">Add Favorite</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
+    </div>
 </body>
 </html>

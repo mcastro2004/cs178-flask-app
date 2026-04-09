@@ -5,6 +5,7 @@
 
 import pymysql
 import creds
+import boto3
 from creds import *
 
 def get_conn():
@@ -33,3 +34,40 @@ def get_countries():
         LIMIT 20
     """
     return execute_query(query)
+
+
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+table = dynamodb.Table('FavoriteCountries')
+
+
+def get_favorites():
+    response = table.scan()
+    return response.get('Items', [])
+
+
+def add_favorite_country(code, name, continent):
+    table.put_item(
+        Item={
+            'Code': code,
+            'Name': name,
+            'Continent': continent,
+            'Note': ''
+        }
+    )
+
+
+def get_one_favorite(code):
+    response = table.get_item(Key={'Code': code})
+    return response.get('Item')
+
+
+def update_favorite_note(code, note):
+    table.update_item(
+        Key={'Code': code},
+        UpdateExpression='SET Note = :n',
+        ExpressionAttributeValues={':n': note}
+    )
+
+
+def delete_favorite_country(code):
+    table.delete_item(Key={'Code': code})
