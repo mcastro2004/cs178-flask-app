@@ -1,5 +1,5 @@
 # author: Michael Castro
-# description: Flask example using redirect, url_for, and flash
+# description: Flask app for world database explorer
 
 
 from flask import Flask
@@ -20,50 +20,40 @@ def countries():
     countries_list = get_countries()
     return render_template('countries.html', countries=countries_list)
 
-"""@app.route('/add-user', methods=['GET', 'POST'])
-def add_user():
+@app.route('/favorites')
+def favorites():
+    favorites_list = get_favorites()
+    return render_template('favorites.html', favorites=favorites_list)
+
+
+@app.route('/add-favorite', methods=['POST'])
+def add_favorite():
+    code = request.form['code']
+    name = request.form['name']
+    continent = request.form['continent']
+
+    add_favorite_country(code, name, continent)
+    flash(f'{name} was added to favorites.', 'success')
+    return redirect(url_for('countries'))
+
+
+@app.route('/update-favorite/<code>', methods=['GET', 'POST'])
+def update_favorite(code):
     if request.method == 'POST':
-        # Extract form data
-        f_name = request.form['f_name']
-        l_name = request.form['l_name']
-        genre = request.form['genre']
-        
-        # Process the data (e.g., add it to a database)
-        # For now, let's just print it to the console
-        print("Name:", f_name + l_name,  ":", "Favorite Genre:", genre)
-        
-        flash('User added successfully! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
-        # Redirect to home page or another page upon successful submission
-        return redirect(url_for('home'))
+        note = request.form['note']
+        update_favorite_note(code, note)
+        flash('Favorite note updated successfully.', 'warning')
+        return redirect(url_for('favorites'))
     else:
-        # Render the form page if the request method is GET
-        return render_template('add_user.html')
-
-@app.route('/delete-user',methods=['GET', 'POST'])
-def delete_user():
-    if request.method == 'POST':
-        # Extract form data
-        name = request.form['name']
-        
-        # Process the data (e.g., add it to a database)
-        # For now, let's just print it to the console
-        print("Name to delete:", name)
-        
-        flash('User deleted successfully! Hoorah!', 'warning') 
-        # Redirect to home page or another page upon successful submission
-        return redirect(url_for('home'))
-    else:
-        # Render the form page if the request method is GET
-        return render_template('delete_user.html')
+        favorite = get_one_favorite(code)
+        return render_template('update_favorite.html', favorite=favorite)
 
 
-@app.route('/display-users')
-def display_users():
-    # hard code a value to the users_list;
-    # note that this could have been a result from an SQL query :) 
-    users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
-    return render_template('display_users.html', users = users_list)
-"""
+@app.route('/delete-favorite/<code>', methods=['POST'])
+def delete_favorite(code):
+    delete_favorite_country(code)
+    flash('Favorite deleted successfully.', 'danger')
+    return redirect(url_for('favorites'))
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
