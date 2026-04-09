@@ -1,6 +1,6 @@
-# author: T. Urness and M. Moore
+# author: Michael Castro
 # description: Flask example using redirect, url_for, and flash
-# credit: the template html files were constructed with the help of ChatGPT
+
 
 from flask import Flask
 from flask import render_template
