@@ -29,10 +29,13 @@ def execute_query(query, args=()):
 
 def get_countries():
     query = """
-        SELECT Code, Name, Continent, Population
+        SELECT country.Code, country.Name, country.Continent, country.Population, MIN(countrylanguage.Language) AS Language
         FROM country
-        ORDER BY Name
-        LIMIT 20
+        JOIN countrylanguage
+            ON country.Code = countrylanguage.CountryCode
+        WHERE countrylanguage.IsOfficial = 'T'
+        GROUP BY country.Code, country.Name, country.Continent, country.Population
+        ORDER BY country.Name
     """
     return execute_query(query)
 

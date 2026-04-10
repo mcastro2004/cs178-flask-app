@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Continent</th>
             <th>Population</th>
+            <th>Language</th>
             <th>Action</th>
         </tr>
 
@@ -22,6 +23,7 @@
             <td>{{ country[1] }}</td>
             <td>{{ country[2] }}</td>
             <td>{{ country[3] }}</td>
+            <td>{{ country[4] }}</td>
             <td>
                 <form action="/add-favorite" method="POST">
                     <input type="hidden" name="code" value="{{ country[0] }}">
