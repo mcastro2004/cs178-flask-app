@@ -18,15 +18,15 @@
 
         {% for country in countries %}
         <tr>
-            <td>{{ country.Code }}</td>
-            <td>{{ country.Name }}</td>
-            <td>{{ country.Continent }}</td>
-            <td>{{ country.Population }}</td>
+            <td>{{ country[0] }}</td>
+            <td>{{ country[1] }}</td>
+            <td>{{ country[2] }}</td>
+            <td>{{ country[3] }}</td>
             <td>
                 <form action="/add-favorite" method="POST">
-                    <input type="hidden" name="code" value="{{ country.Code }}">
-                    <input type="hidden" name="name" value="{{ country.Name }}">
-                    <input type="hidden" name="continent" value="{{ country.Continent }}">
+                    <input type="hidden" name="code" value="{{ country[0] }}">
+                    <input type="hidden" name="name" value="{{ country[1] }}">
+                    <input type="hidden" name="continent" value="{{ country[2] }}">
                     <button type="submit" class="btn btn-success btn-sm">Add Favorite</button>
                 </form>
             </td>

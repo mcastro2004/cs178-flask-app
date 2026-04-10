@@ -32,9 +32,17 @@ def add_favorite():
     name = request.form['name']
     continent = request.form['continent']
 
+    print("CODE:", code)
+    print("NAME:", name)
+    print("CONTINENT:", continent)
+
+    if not code:
+        flash('Country code was blank. Favorite was not added.', 'danger')
+        return redirect(url_for('countries'))
+
     add_favorite_country(code, name, continent)
     flash(f'{name} was added to favorites.', 'success')
-    return redirect(url_for('countries'))
+    return redirect(url_for('favorites'))
 
 
 @app.route('/update-favorite/<code>', methods=['GET', 'POST'])
